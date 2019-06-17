@@ -20,16 +20,22 @@ public final class Geometry {
      * Bar is not oriented
      * (It is not relevant, which opposite corners you choose to define bar)
      * @return new Bar
+     * @param firstCornerX parameter X for first corner
+     * @param firstCornerY parameter Y for first corner
+     * @param secondCornerX parameter X for second corner
+     * @param secondCornerY parameter Y for second corner
      */
     public static Collider createBar(int firstCornerX, int firstCornerY, int secondCornerX, int secondCornerY) {
-        throw new UnsupportedOperationException();
+        return new Bar(firstCornerX, firstCornerY, secondCornerX, secondCornerY);
     }
 
     /**
      * 2D point
      * @return new Point
+     * @param x
+     * @param y
      */
     public static Collider createPoint(int x, int y) {
-        throw new UnsupportedOperationException();
+        return new Point(x,y);
     }
 }
