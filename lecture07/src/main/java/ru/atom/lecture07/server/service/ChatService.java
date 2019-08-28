@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import ru.atom.lecture07.server.controller.ChatController;
 import ru.atom.lecture07.server.dao.MessageDao;
 import ru.atom.lecture07.server.dao.UserDao;
+import ru.atom.lecture07.server.model.Message;
 import ru.atom.lecture07.server.model.User;
 
 import javax.transaction.Transactional;
@@ -20,6 +21,7 @@ public class ChatService {
 
     @Autowired
     private UserDao userDao;
+    @Autowired
     private MessageDao messageDao;
 
     @Nullable
@@ -40,4 +42,26 @@ public class ChatService {
     public List<User> getOnlineUsers() {
         return Lists.newArrayList(userDao.findAll());
     }
+
+    @Transactional
+    public void logout(@NotNull User user) {
+        userDao.delete(user);
+        log.info("[" + user.getLogin() + "] logged out");
+
+    }
+
+    @NotNull
+    @Transactional
+    public List<Message> getMessages() {
+        return Lists.newArrayList(messageDao.findAll());
+    }
+
+    @Transactional
+    public void insertMessage(@NotNull User user, @NotNull String message) {
+        Message msg = new Message();
+        messageDao.save(msg.setUser(user).setValue(message));
+        log.info(msg.toString());
+    }
+
+
 }

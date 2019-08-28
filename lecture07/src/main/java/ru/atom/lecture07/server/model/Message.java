@@ -1,14 +1,25 @@
 package ru.atom.lecture07.server.model;
 
+import org.springframework.data.annotation.Reference;
+
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
+@Table(name = "message", schema = "chat")
 public class Message {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne
+    @JoinColumn(name ="user_id")
     private User user;
 
+    @Column(name = "time", nullable = false)
     private Date time = new Date();
 
+    @Column(name = "value", nullable = false, length = 140)
     private String value;
 
     public User getUser() {
