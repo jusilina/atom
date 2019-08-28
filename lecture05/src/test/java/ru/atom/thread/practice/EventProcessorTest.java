@@ -10,7 +10,7 @@ import java.util.Arrays;
  * @author apomosov
  * @since 15.03.17
  */
-@Ignore
+
 public class EventProcessorTest {
     @Test
     public void process() {
@@ -23,7 +23,9 @@ public class EventProcessorTest {
                 new BadEventProducer(100_000),
                 new BadEventProducer(50_000)));
 
+
         Assert.assertEquals(150_000, EventProcessor.countTotalNumberOfGoodEvents());
         Assert.assertEquals(150_000, EventProcessor.countTotalNumberOfBadEvents());
+
     }
 }
